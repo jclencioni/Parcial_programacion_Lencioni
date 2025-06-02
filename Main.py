@@ -6,7 +6,7 @@ os.system("cls")
 #array_nombres = crear_array(5, None)
 #matriz_puntajes = crear_matriz(5, 3, None)
 #DATOS HARCODEADOS
-array_nombres = ["Tomas Rebord", "Jorge", "Juan", "Guille", "Galia"]
+array_nombres = ["Tomas Rebord", "Guido", "Jorge", "Guille", "Galia"]
 matriz_puntajes = [
     [3, 7, 1],
     [5, 2, 6],
@@ -22,10 +22,8 @@ while True:
     print("")
     
     # VALIDAR QUE SOLO SE PUEDA ELEGIR ENTRE EL 1 Y EL 11. MIRAR EL PROGRAMA DEL REGISTRO.
-    # AGREGAR VOCALES CON ACENTOS
-    # PARA LAS BUSQUEDAS DE NOMBRES O COMPARACIONES TRANSFORMAR MAYUSCULAS EN MINUSCULAS 
+     
     if opcion == "1":
-        #os.system("cls")
         print("\nINGRESANDO NOMBRES DE LOS PARTICIPANTES.")
         cargar_nombres_participantes(array_nombres)
         print("\nPARTICIPANTES INGRESADOS CORRECTAMENTE.")
@@ -49,11 +47,13 @@ while True:
         print("MOSTRANDO JURADO/S MÁS ESTRICTO/S:")
         mostrar_jurados_mas_estrictos(matriz_puntajes)
     elif opcion == "8":
-        pass
+        print("BUSCANDO PARTICIPANTES:")
+        buscar_participantes(matriz_puntajes, array_nombres)
     elif opcion == "9":
-        pass
+        print("MOSTRANDO TOP 3:")
+        mostrar_top_tres(matriz_puntajes, array_nombres)
     elif opcion == "10":
-        pass
+        mostrar_participantes_orden_alfabetico(array_nombres, matriz_puntajes)
     elif opcion == "11":
         print("Saliendo...")
         break

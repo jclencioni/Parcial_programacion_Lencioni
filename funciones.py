@@ -272,4 +272,101 @@ def mostrar_jurados_mas_estrictos(matriz_puntajes: list) -> None:
     for i in range(len(jurados_estrictos)):
         mostrar_jurado(matriz_puntajes, jurados_estrictos[i])
         print("")
+
+def pasar_letra_a_minuscula(letra):
+    letra = str(letra)
     
+    if ord(letra) > 64 and ord(letra) < 91:
+        letra = chr(ord(letra) + 32)
+    elif ord(letra) == 165:
+        letra = chr(164)
+    
+    return letra
+    
+def pasar_cadena_a_minuscula(cadena: str) -> str:
+    cadena_aux = ""
+    
+    for i in range(len(cadena)):
+        if es_mayuscula(cadena[i]):
+            letra = pasar_letra_a_minuscula(cadena[i])
+            cadena_aux += letra
+        else:
+            cadena_aux += cadena[i]
+            
+    return cadena_aux
+
+def buscar_participantes(matriz_puntajes: list, array_nombres: list) -> None:
+    bandera = False
+    
+    nombre = input("Ingrese el nombre del participante que desea buscar: ")
+    print(f"\nMOSTRANDO PARTICIPANTES LLAMADOS {nombre}:")
+    nombre_buscado = pasar_cadena_a_minuscula(nombre)
+    print("")
+    
+    for i in range(len(array_nombres)):
+        nombre_a_comparar = pasar_cadena_a_minuscula(array_nombres[i])
+        if encontrar_subcadena(nombre_a_comparar, nombre_buscado):
+            bandera = True
+            mostrar_participante(matriz_puntajes, array_nombres, i)
+            print("")
+
+    if bandera == False:
+        print(f"///Error. No existen participantes llamados {nombre}.///")
+    
+def encontrar_subcadena(cadena: str, subcadena: str) -> bool:
+    longitud_subcadena = len(subcadena)
+    bandera = False
+    
+    for i in range(len(cadena) - longitud_subcadena + 1):
+        if cadena[i:longitud_subcadena] == subcadena:
+            bandera = True
+            break
+        else:
+            longitud_subcadena += 1
+            continue
+
+    return bandera        
+    
+def intercambiar_valores(lista: list, valor_izq: int, valor_der: int) -> list:
+    auxiliar = lista[valor_izq]
+    lista[valor_izq] = lista[valor_der]
+    lista[valor_der] = auxiliar
+    
+    return lista
+
+def crear_lista_promedios(matriz_puntajes: list) -> list:
+    lista_promedios = crear_array(5, None)
+    
+    for i in range(len(matriz_puntajes)):
+        promedio = promediar_fila(matriz_puntajes, i)
+        lista_promedios[i] = promedio
+        
+    return lista_promedios
+
+def mostrar_top_tres(matriz_puntajes: list, array_nombres: list) -> None:
+    lista_promedios = crear_lista_promedios(matriz_puntajes)
+        
+    for izq in range(len(lista_promedios) - 1):
+            for der in range(izq + 1, len(lista_promedios)):
+                    if lista_promedios[izq] < lista_promedios[der]:
+                        lista_promedios = intercambiar_valores(lista_promedios, izq, der)
+                        matriz_puntajes = intercambiar_valores(matriz_puntajes, izq, der)
+                        array_nombres = intercambiar_valores(array_nombres, izq, der)
+                    else:
+                        continue
+    
+    for i in range(3):
+        mostrar_participante(matriz_puntajes, array_nombres, i)
+        print("")
+        
+def mostrar_participantes_orden_alfabetico(array_nombres: list, matriz_puntajes: list) -> None:
+
+    for izq in range(len(array_nombres) - 1):
+            for der in range(izq + 1, len(array_nombres)):
+                    if pasar_cadena_a_minuscula(array_nombres[izq]) > pasar_cadena_a_minuscula(array_nombres[der]):
+                        matriz_puntajes = intercambiar_valores(matriz_puntajes, izq, der)
+                        array_nombres = intercambiar_valores(array_nombres, izq, der)
+                    else:
+                        continue
+                    
+    mostrar_puntajes(matriz_puntajes, array_nombres)
