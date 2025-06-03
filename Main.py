@@ -48,12 +48,12 @@ while True:
         print("")
         mostrar_jurados_mas_estrictos(matriz_puntajes)
     elif opcion == 8:
-        busqueda = pedir_entero("Ingrese:\n1. Para realizar una búsqueda exacta.\n2. Para buscar por coinidencia de los primeros caracteres: ", "Seleccione 1 o 2: ", 1, 2)
+        busqueda = pedir_entero("Ingrese:\n1. Para realizar una búsqueda exacta.\n2. Para buscar por coinidencia de los primeros caracteres.\nSu opción:  ", "Seleccione 1 o 2: ", 1, 2)
         if busqueda == 1:
-            print("BUSCANDO PARTICIPANTES:")
+            print("\nBUSCANDO PARTICIPANTES:")
             buscar_participante_exacto(matriz_puntajes, array_nombres)
         elif busqueda == 2:
-            print("BUSCANDO PARTICIPANTES:")
+            print("\nBUSCANDO PARTICIPANTES:")
             buscar_participantes(matriz_puntajes, array_nombres)
     elif opcion == 9:
         print("MOSTRANDO TOP 3:")

@@ -278,7 +278,7 @@ def pasar_cadena_a_minuscula(cadena: str) -> str:
     return cadena_aux
 
 def buscar_participante_exacto(matriz_puntajes: list, array_nombres: list) -> None:
-    """Busca e imprime los nombres de los participantes que se le indique. Si el nombre de algún participante comienza con los caracteres ingresados también lo muestra.
+    """Busca e imprime los nombres de los participantes que se le indique. 
 
     Args:
         matriz_puntajes (list): matriz en la cual buscará los datos del participante.
@@ -289,10 +289,11 @@ def buscar_participante_exacto(matriz_puntajes: list, array_nombres: list) -> No
     nombre = input("Ingrese el nombre del participante que desea buscar: ")
     print(f"\nMOSTRANDO PARTICIPANTES LLAMADOS '{nombre}':")
     print("")
+    nombre_buscado = pasar_cadena_a_minuscula(nombre)
     
     for i in range(len(array_nombres)):
         nombre_a_comparar = pasar_cadena_a_minuscula(array_nombres[i])
-        if nombre_a_comparar == nombre:
+        if nombre_a_comparar == nombre_buscado:
             bandera = True
             mostrar_participante(matriz_puntajes, array_nombres, i)
             print("")
